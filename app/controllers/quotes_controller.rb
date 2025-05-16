@@ -20,7 +20,8 @@ class QuotesController < ApplicationController
     if @quote.save
       redirect_to quotes_path, notice: "Quote was successfully created."
     else
-      render :new
+      # 無効なフォーム送信は、Turbo Driveが<body>ページの を置き換えてフォームエラーを表示するために、422ステータスコードを返す必要があります。Railsにおける422ステータスコードのエイリアスは です。そのため、Ruby on Rails 7以降、無効なフォーム送信によってリソースを保存できなかった場合、:unprocessable_entityscaffoldジェネレーターはとアクションを追加status: :unprocessable_entityします。
+      render :new, status: :unprocessable_entity
     end
   end
 
