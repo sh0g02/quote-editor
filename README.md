@@ -34,6 +34,8 @@ Quote Editorは、Hotwireを使用して構築されたシンプルな見積も�
 
 ## セットアップ
 
+### 通常のセットアップ
+
 ```bash
 # リポジトリをクローン
 git clone [repository-url]
@@ -48,6 +50,31 @@ rails db:migrate
 
 # サーバーの起動
 bin/dev
+```
+
+### Dockerを使用したセットアップ
+
+#### 開発環境
+
+```bash
+# 開発用コンテナのビルドと起動
+docker-compose -f docker-compose.dev.yml build
+docker-compose -f docker-compose.dev.yml up
+
+# 別のターミナルでデータベースのセットアップ（初回のみ）
+docker-compose -f docker-compose.dev.yml exec web rails db:prepare
+```
+
+#### 本番環境
+
+```bash
+# 本番用コンテナのビルドと起動
+docker-compose build
+docker-compose up
+
+# 注意: 本番環境では適切なSECRET_KEY_BASEを設定してください
+# docker-compose.ymlのSECRET_KEY_BASE環境変数を変更するか、
+# 環境変数として渡してください
 ```
 
 ## 参考リソース
