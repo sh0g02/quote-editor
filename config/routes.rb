@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :quotes
+  
+  # Stimulus Tutorial
+  get "/stimulus-tutorial", to: "stimulus_tutorial#index", as: :stimulus_tutorial
 end

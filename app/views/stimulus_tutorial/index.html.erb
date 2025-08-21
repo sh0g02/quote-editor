@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stimulus.js ハンズオン - 初学者向けチュートリアル</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hidden { display: none !important; }
+    .visible { display: block !important; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Stimulus.js ハンズオン</h1>
+    <p class="text-center mb-12 text-gray-600">初学者向けのStimulus.js学習チュートリアル</p>
+
+    <!-- Exercise 1: Basic Counter -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-blue-600">演習 1: 基本のカウンター</h2>
+      <p class="mb-4 text-gray-600">Stimulusの基本概念を学びます：Controller、Target、Action</p>
+      
+      <div data-controller="counter" class="bg-gray-50 p-4 rounded">
+        <div class="text-center mb-4">
+          <span class="text-3xl font-bold" data-counter-target="count">0</span>
+        </div>
+        <div class="flex justify-center space-x-2">
+          <button data-action="click->counter#increment" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">+</button>
+          <button data-action="click->counter#decrement" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">-</button>
+          <button data-action="click->counter#reset" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">リセット</button>
+        </div>
+      </div>
+
+      <div class="mt-4 p-4 bg-yellow-50 rounded">
+        <h3 class="font-semibold text-yellow-800">学習ポイント:</h3>
+        <ul class="list-disc list-inside text-yellow-700 mt-2">
+          <li><code>data-controller</code>: コントローラーを指定</li>
+          <li><code>data-{controller}-target</code>: 操作対象の要素を指定</li>
+          <li><code>data-action</code>: イベントとメソッドの紐付け</li>
+          <li><code>initialize()</code>と<code>connect()</code>の違い</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Exercise 2: Form Validation -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-green-600">演習 2: フォームバリデーション</h2>
+      <p class="mb-4 text-gray-600">Values APIを使用したリアルタイムバリデーション</p>
+      
+      <div data-controller="form-validation" data-form-validation-min-length-value="3" data-form-validation-required-value="true" class="bg-gray-50 p-4 rounded">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            名前 (3文字以上)
+          </label>
+          <input data-form-validation-target="input" data-action="input->form-validation#validate" 
+                 type="text" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+          <div data-form-validation-target="error" class="text-red-500 text-sm mt-1 hidden"></div>
+        </div>
+        <button data-form-validation-target="submit" class="bg-green-500 text-white px-4 py-2 rounded opacity-50" disabled>
+          送信
+        </button>
+      </div>
+
+      <div class="mt-4 p-4 bg-yellow-50 rounded">
+        <h3 class="font-semibold text-yellow-800">学習ポイント:</h3>
+        <ul class="list-disc list-inside text-yellow-700 mt-2">
+          <li><code>static values</code>: 設定値の定義</li>
+          <li><code>data-{controller}-{value-name}-value</code>: 値の設定</li>
+          <li>リアルタイムバリデーション</li>
+          <li>CSS クラスの動的変更</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Exercise 3: Toggle Visibility -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-purple-600">演習 3: 表示切り替え</h2>
+      <p class="mb-4 text-gray-600">Classes APIを使用した要素の表示/非表示切り替え</p>
+      
+      <div data-controller="toggle" 
+           data-toggle-hidden-class="hidden" 
+           data-toggle-visible-class="visible"
+           class="bg-gray-50 p-4 rounded">
+        <div class="mb-4">
+          <button data-action="click->toggle#toggle" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 mr-2">
+            全て切り替え
+          </button>
+          <button data-action="click->toggle#toggleFirst" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 mr-2">
+            最初を切り替え
+          </button>
+          <button data-action="click->toggle#toggleSecond" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">
+            2番目を切り替え
+          </button>
+        </div>
+        <div data-toggle-target="toggleable" class="p-4 bg-blue-100 rounded mb-2">
+          <p class="text-blue-800">これは最初の切り替え可能な要素です</p>
+        </div>
+        <div data-toggle-target="toggleable" class="p-4 bg-green-100 rounded">
+          <p class="text-green-800">これは2番目の切り替え可能な要素です</p>
+        </div>
+      </div>
+
+      <div class="mt-4 p-4 bg-yellow-50 rounded">
+        <h3 class="font-semibold text-yellow-800">学習ポイント:</h3>
+        <ul class="list-disc list-inside text-yellow-700 mt-2">
+          <li><code>static classes</code>: CSSクラスの定義</li>
+          <li><code>data-{controller}-{class-name}-class</code>: クラスの設定</li>
+          <li>複数のターゲット操作</li>
+          <li>条件分岐の実装</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Exercise 4: Todo List -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-orange-600">演習 4: ToDoリスト (上級)</h2>
+      <p class="mb-4 text-gray-600">複合的な機能を持つToDoリスト - DOM操作、データ管理、永続化</p>
+      
+      <div data-controller="todo" data-todo-persist-value="true" class="bg-gray-50 p-4 rounded">
+        <div class="mb-4">
+          <div class="flex">
+            <input data-todo-target="input" data-action="keydown->todo#handleKeydown" 
+                   type="text" placeholder="新しいタスクを入力..." 
+                   class="flex-1 px-3 py-2 border border-gray-300 rounded-l focus:outline-none focus:border-blue-500">
+            <button data-action="click->todo#addTodo" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">
+              追加
+            </button>
+          </div>
+        </div>
+        
+        <div data-todo-target="counter" class="mb-4 text-gray-600 text-sm"></div>
+        
+        <div data-todo-target="list" class="mb-4">
+          <!-- Dynamic todo items will be inserted here -->
+        </div>
+        
+        <button data-action="click->todo#clearCompleted" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+          完了済みを削除
+        </button>
+      </div>
+
+      <div class="mt-4 p-4 bg-yellow-50 rounded">
+        <h3 class="font-semibold text-yellow-800">学習ポイント:</h3>
+        <ul class="list-disc list-inside text-yellow-700 mt-2">
+          <li>動的なDOM要素の生成</li>
+          <li>配列データの管理</li>
+          <li>LocalStorageを使った永続化</li>
+          <li>キーボードイベントの処理</li>
+          <li>複数のイベントハンドリング</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Exercise 5: AJAX Requests -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-teal-600">演習 5: AJAX通信</h2>
+      <p class="mb-4 text-gray-600">Fetch APIを使用したサーバーとの通信</p>
+      
+      <div data-controller="ajax" data-ajax-url-value="https://jsonplaceholder.typicode.com/posts/1" class="bg-gray-50 p-4 rounded">
+        <div class="mb-4">
+          <button data-action="click->ajax#fetchData" class="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 mr-2">
+            データ取得
+          </button>
+        </div>
+        
+        <div data-ajax-target="loading" class="hidden text-blue-600 mb-4">
+          <div class="flex items-center">
+            <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
+            読み込み中...
+          </div>
+        </div>
+        
+        <div data-ajax-target="error" class="hidden text-red-600 mb-4 p-2 bg-red-50 rounded"></div>
+        
+        <div data-ajax-target="output" class="mt-4">
+          <!-- API response will be displayed here -->
+        </div>
+      </div>
+
+      <div class="mt-4 p-4 bg-yellow-50 rounded">
+        <h3 class="font-semibold text-yellow-800">学習ポイント:</h3>
+        <ul class="list-disc list-inside text-yellow-700 mt-2">
+          <li>Fetch APIの使用</li>
+          <li>async/await パターン</li>
+          <li>エラーハンドリング</li>
+          <li>ローディング状態の管理</li>
+          <li>JSON レスポンスの処理</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Exercise 6: Dropdown Menu -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-indigo-600">演習 6: ドロップダウンメニュー</h2>
+      <p class="mb-4 text-gray-600">外部クリック検出、キーボードナビゲーション、アクセシビリティ</p>
+      
+      <div data-controller="dropdown" 
+           data-dropdown-open-class="block" 
+           data-dropdown-closed-class="hidden"
+           class="bg-gray-50 p-4 rounded relative">
+        <button data-dropdown-target="button" 
+                data-action="click->dropdown#toggle" 
+                class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                aria-haspopup="true"
+                aria-expanded="false">
+          オプションを選択 ▼
+        </button>
+        
+        <div data-dropdown-target="menu" 
+             class="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-300 rounded shadow-lg z-10 hidden">
+          <a href="#" data-action="click->dropdown#selectOption" data-dropdown-option="option1" 
+             class="block px-4 py-2 text-gray-800 hover:bg-gray-100">オプション 1</a>
+          <a href="#" data-action="click->dropdown#selectOption" data-dropdown-option="option2" 
+             class="block px-4 py-2 text-gray-800 hover:bg-gray-100">オプション 2</a>
+          <a href="#" data-action="click->dropdown#selectOption" data-dropdown-option="option3" 
+             class="block px-4 py-2 text-gray-800 hover:bg-gray-100">オプション 3</a>
+        </div>
+      </div>
+
+      <div class="mt-4 p-4 bg-yellow-50 rounded">
+        <h3 class="font-semibold text-yellow-800">学習ポイント:</h3>
+        <ul class="list-disc list-inside text-yellow-700 mt-2">
+          <li>外部クリック検出</li>
+          <li>キーボードナビゲーション (ESCキー)</li>
+          <li>アクセシビリティ属性</li>
+          <li>カスタムイベントの発行</li>
+          <li>DOM イベントリスナーの管理</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-4">まとめ</h2>
+      <p class="mb-4">このハンズオンでは、Stimulus.jsの主要な機能を段階的に学習しました：</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>基本概念:</strong> Controller、Target、Action の関係</li>
+        <li><strong>Values API:</strong> 設定値の外部からの注入</li>
+        <li><strong>Classes API:</strong> CSSクラスの動的管理</li>
+        <li><strong>DOM操作:</strong> 動的なコンテンツの生成と管理</li>
+        <li><strong>AJAX通信:</strong> サーバーとの非同期通信</li>
+        <li><strong>イベント管理:</strong> 複雑なユーザーインタラクションの処理</li>
+      </ul>
+      <p class="mt-4">これらの知識を組み合わせることで、リッチなWebアプリケーションを構築できます。</p>
+    </div>
+  </div>
+</body>
+</html>

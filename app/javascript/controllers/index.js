@@ -6,3 +6,21 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import CounterController from "./counter_controller"
+application.register("counter", CounterController)
+
+import FormValidationController from "./form_validation_controller"
+application.register("form-validation", FormValidationController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
+
+import TodoController from "./todo_controller"
+application.register("todo", TodoController)
+
+import AjaxController from "./ajax_controller"
+application.register("ajax", AjaxController)
+
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
